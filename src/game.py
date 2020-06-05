@@ -8,7 +8,7 @@ class Game:
         self.nAI = nAI
 
     def getInput(self, name, type):
-        return eval(input(f'Give a value for {name} as type {type}: '))
+        return eval(input(f'Give a value for {name} as type {type.__name__}: '))
 
     def sendOutput(self, name, output):
         print(f'{name}: {output}')
