@@ -1,5 +1,6 @@
-from game import Game
+from kivy_games.game import Game
 import numpy as np
+import asyncio
 
 class CellOccupiedError(Exception):
     pass
@@ -17,8 +18,6 @@ class NoughtsAndCrosses(Game):
 
         self.grid = np.zeros(self.gridShape, dtype='u1')
         self.player = 1
-
-        self.game()
 
     def isEmpty(self, position):
         return self.grid[position] == 0
@@ -38,28 +37,29 @@ class NoughtsAndCrosses(Game):
                 return True
         return False
 
-    def turn(self):
+    async def turn(self):
+        await self.sendOutput('Player', self.player)
         while True:
-            position = self.getInput('Position', tuple)
+            position = await self.getInput('Position', tuple)
             if self.isEmpty(position):
                 break
-            self.sendOutput('Error', 'That space is already full.')
+            await self.sendOutput('Error', 'That space is already full.')
 
         self.place(self.player, position)
+        await self.sendOutput('Grid', self.grid)
         if self.hasPlayerWon(self.player):
-            self.sendOutput('End', f'Player {self.player} wins.')
+            await self.sendOutput('End', f'Player {self.player} wins.')
             return True
         if np.count_nonzero(self.grid) == 9:
-            self.sendOutput('End', f'It\'s a draw!')
+            await self.sendOutput('End', f'It\'s a draw!')
             return True
         self.player = abs(self.player - 3)
 
         return False
 
-    def game(self):
+    async def game(self):
         while True:
-            turn = self.turn()
-            if (turn):
+            ended = await self.turn()
+            if (ended):
                 break
-
-NoughtsAndCrosses(2, 0)
+        await self.end()
