@@ -1,6 +1,7 @@
-from kivy_games.game import Game
-import numpy as np
 import asyncio
+import numpy as np
+
+from kivy_games.games import Game
 
 class CellOccupiedError(Exception):
     pass
