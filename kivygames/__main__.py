@@ -3,6 +3,7 @@ from os.path import abspath, join
 from importlib import import_module
 from kivy.app import App
 from kivy.lang.builder import Builder
+from kivy.core.window import Window
 import kivy
 
 kivy.require('1.11.1')
@@ -13,9 +14,12 @@ def importKv():
     for widgetDir in widgetDirs:
         Builder.load_file(join(widgetDir.path, 'widget.kv'))
         import_module(f'kivygames.widgets.{widgetDir.name}')
+    Builder.load_file(abspath(f'{__file__}/../style.kv'))
 
 class KivyGamesApp(App):
-    pass
+    def build(self):
+        Window.clearcolor = (1, 1, 1, 1)
+        self.title = 'Kivy Games'
 
 if __name__ == '__main__':
     importKv()

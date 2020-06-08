@@ -3,11 +3,12 @@
 <MainMenu>:
     BoxLayout:
         size: self.parent.size
+        padding: 20
         orientation: 'vertical'
         Label:
+            size_hint: 1, None
             text: 'Kivy Games'
         GridLayout:
-            padding: 10, 10, 10, 10
             cols: 3
             Button:
                 text: 'Noughts And Crosses'

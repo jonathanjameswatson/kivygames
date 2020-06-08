@@ -1,0 +1,24 @@
+#:kivy 1.11.1
+
+<Label>:
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            texture: self.texture
+            size: self.texture_size
+            pos: int(self.center_x - self.texture_size[0] / 2.), int(self.center_y - self.texture_size[1] / 2.)
+
+<-Button,-ToggleButton>:
+    canvas:
+        Color:
+            rgba: [0.75, 0.75, 0.75, 1] if self.state == 'normal' else [0.8, 0.8, 0.8, 1]
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            texture: self.texture
+            size: self.texture_size
+            pos: int(self.center_x - self.texture_size[0] / 2.), int(self.center_y - self.texture_size[1] / 2.)
