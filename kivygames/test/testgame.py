@@ -1,4 +1,4 @@
-from kivy_games.noughts_and_crosses import NoughtsAndCrosses
+from kivygames.noughtsandcrosses import NoughtsAndCrosses
 
 def testGame():
     game = NoughtsAndCrosses(2, 0)

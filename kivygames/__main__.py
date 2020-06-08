@@ -1,7 +1,7 @@
 from kivy.app import App
 import kivy
 
-from kivy_games.gui.main_menu import MainMenu
+from kivygames.gui.mainmenu import MainMenu
 
 kivy.require('1.11.1')
 
