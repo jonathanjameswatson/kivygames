@@ -1,3 +1,15 @@
 #:kivy 1.11.1
 
-MainMenu:
+ScreenManager:
+    id: screenmanager
+    Screen:
+        id: mainmenuscreen
+        name: 'mainmenuscreen'
+        manager: 'screenmanager'
+        MainMenu:
+    Screen:
+        id: noughtsandcrosses
+        name: 'noughtsandcrosses'
+        manager: 'screenmanager'
+        FloatLayout:
+            NoughtsAndCrossesBoard:

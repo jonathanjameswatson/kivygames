@@ -1,5 +1,8 @@
 #:kivy 1.11.1
 
 <NoughtsAndCrossesBoard>:
+    size_hint: None, None
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    size: [min(self.parent.size)] * 2
     cols: 3
     spacing: 5
