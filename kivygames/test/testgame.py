@@ -1,4 +1,5 @@
-from kivygames.noughtsandcrosses import NoughtsAndCrosses
+from kivygames.games.noughtsandcrosses import NoughtsAndCrosses
+
 
 def testGame():
     game = NoughtsAndCrosses(2, 0)
@@ -8,7 +9,8 @@ def testGame():
         if isInput:
             inputName = io[1]
             inputType = io[2]
-            response = eval(input(f'Input value {inputName} of type {inputType.__name__}: '))
+            response = eval(
+                input(f'Input value {inputName} of type {inputType.__name__}: '))
             io = game.send(response)
         else:
             outputName = io[1]

@@ -3,6 +3,7 @@ import numpy as np
 
 from kivygames.games import Game
 
+
 class CellOccupiedError(Exception):
     pass
 
