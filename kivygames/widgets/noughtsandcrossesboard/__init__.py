@@ -1,4 +1,4 @@
-from kivy.properties import ListProperty
+from kivy.properties import ListProperty, NumericProperty
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
@@ -7,11 +7,13 @@ from kivy.uix.behaviors import ButtonBehavior
 class Cell(ButtonBehavior, Image):
     pass
 
+
 marks = ['empty.png', 'nought.png', 'cross.png']
 
 
 class NoughtsAndCrossesBoard(GridLayout):
     cellsProperty = ListProperty([0] * 9)
+    playerProperty = NumericProperty(1)
 
     def __init__(self, **kwargs):
         GridLayout.__init__(self, **kwargs)
@@ -29,4 +31,5 @@ class NoughtsAndCrossesBoard(GridLayout):
             cell.source = marks[self.cellsProperty[i]]
 
     def increase(self, i):
-        self.cellsProperty[i] = (self.cellsProperty[i] + 1) % 3
+        self.cellsProperty[i] = self.playerProperty
+        self.playerProperty = abs(self.playerProperty - 3)
