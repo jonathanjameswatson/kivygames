@@ -1,0 +1,18 @@
+#:kivy 1.11.1
+
+<NoughtsAndCrosses>:
+    orientation: 'vertical'
+    Label:
+        text: 'Noughts and crosses'
+        size_hint: 1, None
+    BoxLayout:
+        padding: 20
+        orientation: 'vertical' if self.parent.size[0] < self.parent.size[1] else 'horizontal'
+        Label:
+            text: 'Player 1'
+        NoughtsAndCrossesBoard:
+        Label:
+            text: 'ERROR'
+    Label:
+        text: ' '
+        size_hint: 1, None

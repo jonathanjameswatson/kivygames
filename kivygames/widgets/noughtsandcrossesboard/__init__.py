@@ -20,7 +20,7 @@ class NoughtsAndCrossesBoard(GridLayout):
         self.cells = []
         for i in range(9):
             cell = Cell(source=marks[0], on_press=lambda sender,
-                          i=i: self.increase(i))
+                        i=i: self.increase(i))
             self.add_widget(cell)
             self.cells.append(cell)
 
