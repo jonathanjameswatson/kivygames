@@ -4,6 +4,7 @@ from importlib import import_module
 from kivy.app import App
 from kivy.lang.builder import Builder
 from kivy.core.window import Window
+from kivy.resources import resource_add_path
 import kivy
 
 
@@ -28,4 +29,5 @@ class KivyGamesApp(App):
 
 if __name__ == '__main__':
     importKv()
+    resource_add_path(abspath(f'{__file__}/../assets'))
     KivyGamesApp().run()

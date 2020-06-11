@@ -1,9 +1,13 @@
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.button import Button
 from kivy.properties import ListProperty
-from kivy.clock import Clock
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
 
-marks = [' ', 'O', 'X']
+
+class Cell(ButtonBehavior, Image):
+    pass
+
+marks = ['empty.png', 'nought.png', 'cross.png']
 
 
 class NoughtsAndCrossesBoard(GridLayout):
@@ -13,7 +17,7 @@ class NoughtsAndCrossesBoard(GridLayout):
         GridLayout.__init__(self, **kwargs)
         self.cells = []
         for i in range(9):
-            cell = Button(text=' ', on_press=lambda sender,
+            cell = Cell(source=marks[0], on_press=lambda sender,
                           i=i: self.increase(i))
             self.add_widget(cell)
             self.cells.append(cell)
@@ -22,7 +26,7 @@ class NoughtsAndCrossesBoard(GridLayout):
 
     def updateCells(self):
         for i, cell in enumerate(self.cells):
-            cell.text = marks[self.cellsProperty[i]]
+            cell.source = marks[self.cellsProperty[i]]
 
     def increase(self, i):
         self.cellsProperty[i] = (self.cellsProperty[i] + 1) % 3
