@@ -7,7 +7,10 @@ verify_ssl = true
 
 [packages]
 numpy = ">=1.18"
-Kivy = ">=1.11"
+Kivy = ">=2.0.0rc2"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
