@@ -1,5 +1,6 @@
-from kivy.uix.boxlayout import BoxLayout
+from kivygames.games.noughtsandcrosses import NoughtsAndCrosses
+from kivygames.widgets import GameLayout
 
 
-class NoughtsAndCrosses(BoxLayout):
-    pass
+class NoughtsAndCrosses(GameLayout):
+    gameFunction = NoughtsAndCrosses
