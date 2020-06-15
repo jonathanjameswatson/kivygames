@@ -12,4 +12,4 @@ class NoughtsAndCrosses(GameLayout):
         'End': '',
         'Grid': [0] * 9
     })
-    playerText = AliasProperty(lambda self: str(self.outputs['Player']), bind=['outputs'])
+    playerText = AliasProperty(lambda self: f'Player {self.outputs["Player"]}', bind=['outputs'])
