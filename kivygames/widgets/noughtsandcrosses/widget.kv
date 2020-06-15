@@ -9,10 +9,12 @@
         padding: 20
         orientation: 'vertical' if self.parent.size[0] < self.parent.size[1] else 'horizontal'
         Label:
-            text: 'Player 1'
+            text: root.playerText
         NoughtsAndCrossesBoard:
+            cellsProperty: root.outputs['Grid']
+            on_choose: root.gameInput('Position', *args)
         Label:
-            text: 'ERROR'
+            text: root.outputs['Error']
     Label:
-        text: ' '
+        text: root.outputs['End']
         size_hint: 1, None

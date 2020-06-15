@@ -15,22 +15,33 @@ def loadKv():
 
 class GameLayout(BoxLayout):
     gameFunction = None
-    outputs = DictProperty()
+    outputs = DictProperty({})
 
     def __init__(self, **kwargs):
         BoxLayout.__init__(self, **kwargs)
         self.game = self.gameFunction(2, 0)
-        '''io = game.send(None)
-        while io != StopIteration:
-            isInput = io[0]
-            if isInput:
-                inputName = io[1]
-                inputType = io[2]
-                response = eval(
-                    input(f'Input value {inputName} of type {inputType.__name__}: '))
-                io = game.send(response)
-            else:
-                outputName = io[1]
-                response = io[2]
-                print(f'{outputName}: {response}')
-                io = game.send(None)'''
+        self.ended = False
+        self.nextInput = (None, None)
+        self.send()
+
+    def send(self, value=None):
+        io = self.game.send(value)
+        if io == StopIteration:
+            self.ended = True
+            return None
+
+        isInput = io[0]
+        if isInput:
+            self.nextInput = io[1:]
+        else:
+            outputName = io[1]
+            outputValue = io[2]
+            self.outputs[outputName] = outputValue
+            self.send()
+
+    def gameInput(self, name, object, value):
+        if self.ended:
+            return None
+
+        if name == self.nextInput[0]:
+            self.send(value)
