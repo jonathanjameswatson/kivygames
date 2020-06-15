@@ -35,8 +35,8 @@ class NoughtsAndCrosses(Game):
         for i in (0, 1):
             if cells.all(axis=i).any():
                 return True
-            if np.diagonal(cells, i).all():
-                return True
+        if cells.diagonal().all() or np.fliplr(cells).diagonal().all():
+            return True
         return False
 
     async def turn(self):
@@ -48,7 +48,7 @@ class NoughtsAndCrosses(Game):
             await self.sendOutput('Error', 'That space is already full.')
 
         self.place(self.player, position)
-        await self.sendOutput('Grid', self.grid)
+        await self.sendOutput('Grid', self.grid.flatten().tolist())
         if self.hasPlayerWon(self.player):
             await self.sendOutput('End', f'Player {self.player} wins.')
             return True
