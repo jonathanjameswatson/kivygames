@@ -19,13 +19,19 @@ class Game:
         self.nPlayers = nPlayers
         self.nAI = nAI
 
+        self.players = (False, True)
         self.generator = self.game()
 
     async def game(self):
         pass
 
-    async def getInput(self, name, dataType):
-        response = await IO(True, name, dataType)
+    def getAIInput(self, name, player):
+        pass
+
+    async def getInput(self, name, dataType, player):
+        if self.players[player - 1]:
+            return self.getAIInput(name)
+        response = await IO(True, name, dataType, player)
         return response
 
     async def sendOutput(self, name, output):
