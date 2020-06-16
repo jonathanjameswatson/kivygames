@@ -1,3 +1,4 @@
+import numpy as np
 from kivy.properties import DictProperty, AliasProperty
 
 from kivygames.games.noughtsandcrosses import NoughtsAndCrosses
@@ -10,6 +11,8 @@ class NoughtsAndCrosses(GameLayout):
         'Player': 1,
         'Error': '',
         'End': '',
-        'Grid': [0] * 9
+        'Grid': np.zeros((3, 3))
     })
     playerText = AliasProperty(lambda self: f'Player {self.outputs["Player"]}', bind=['outputs'])
+    cells = AliasProperty(
+        lambda self: self.outputs['Grid'].flatten().tolist(), bind=['outputs'])

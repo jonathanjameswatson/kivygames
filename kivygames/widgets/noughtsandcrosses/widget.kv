@@ -11,7 +11,7 @@
         Label:
             text: root.playerText
         NoughtsAndCrossesBoard:
-            cellsProperty: root.outputs['Grid']
+            cellsProperty: root.cells
             on_choose: root.gameInput('Position', *args)
         Label:
             text: root.outputs['Error']
