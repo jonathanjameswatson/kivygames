@@ -2,7 +2,7 @@ import asyncio
 
 
 class IO:
-    def __init__(self, message):
+    def __init__(self, *message):
         self.message = message
 
     def __await__(self):
@@ -25,11 +25,11 @@ class Game:
         pass
 
     async def getInput(self, name, dataType):
-        response = await IO((True, name, dataType))
+        response = await IO(True, name, dataType)
         return response
 
     async def sendOutput(self, name, output):
-        await IO((False, name, output))
+        await IO(False, name, output)
 
     async def end(self):
         await IO(StopIteration)
