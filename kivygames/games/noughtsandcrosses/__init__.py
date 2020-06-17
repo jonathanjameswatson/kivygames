@@ -3,6 +3,8 @@ import numpy as np
 
 from kivygames.games import Game
 
+import kivygames.games.noughtsandcrosses.c as c
+
 
 class CellOccupiedError(Exception):
     pass
@@ -24,15 +26,6 @@ class NoughtsAndCrosses(Game):
     def isEmpty(self, position):
         return self.grid[position] == 0
 
-    def hasPlayerWon(self, player):
-        cells = self.grid == np.full(self.gridShape, player)
-        for i in (0, 1):
-            if cells.all(axis=i).any():
-                return True
-        if cells.diagonal().all() or np.fliplr(cells).diagonal().all():
-            return True
-        return False
-
     async def turn(self):
         await self.sendOutput('Player', self.player)
         while True:
@@ -43,7 +36,7 @@ class NoughtsAndCrosses(Game):
 
         self.grid[position] = self.player
         await self.sendOutput('Grid', self.grid)
-        if self.hasPlayerWon(self.player):
+        if c.hasPlayerWon(self.grid, self.player):
             await self.sendOutput('End', f'Player {self.player} wins.')
             return True
         if np.count_nonzero(self.grid) == 9:
@@ -55,7 +48,7 @@ class NoughtsAndCrosses(Game):
 
     def getAIInput(self, name):
         if name == 'Position':
-            return self.minMax(self.player)[1]
+            return c.minimax(self.player, self.player, True, self.grid)[1]
 
     def minMax(self, player, isMin=True):
         bestScore = -2 if isMin else 2
