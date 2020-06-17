@@ -49,7 +49,7 @@ class NoughtsAndCrosses(Game):
         if np.count_nonzero(self.grid) == 9:
             await self.sendOutput('End', f'It\'s a draw!')
             return True
-        self.player = abs(self.player - 3)
+        self.player = 3 - self.player
 
         return False
 
@@ -69,7 +69,7 @@ class NoughtsAndCrosses(Game):
             if self.hasPlayerWon(player, newGrid):
                 score = abs(self.player - player) * 2 - 1
             else:
-                score = self.minMax(abs(player - 3), newGrid, not isMin)[0]
+                score = self.minMax(3 - player, newGrid, not isMin)[0]
             if score == bestScore or isMin == (score < bestScore):
                 bestScore = score
                 bestIndex = index
