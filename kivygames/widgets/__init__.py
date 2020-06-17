@@ -26,12 +26,11 @@ class GameLayout(BoxLayout):
 
     def send(self, value=None):
         io = self.game.send(value)
-        if io == StopIteration:
+        isInput = io[0]
+        if isInput == StopIteration:
             self.ended = True
             return None
-
-        isInput = io[0]
-        if isInput:
+        elif isInput:
             self.nextInput = io[1:]
         else:
             outputName = io[1]
