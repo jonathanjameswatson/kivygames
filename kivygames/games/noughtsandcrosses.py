@@ -21,11 +21,11 @@ class NoughtsAndCrosses(Game):
         self.grid = np.zeros(self.gridShape, dtype='u1')
         self.player = 1
 
-    def isEmpty(self, position, grid):
-        return grid[position] == 0
+    def isEmpty(self, position):
+        return self.grid[position] == 0
 
-    def hasPlayerWon(self, player, grid):
-        cells = grid == np.full(self.gridShape, player)
+    def hasPlayerWon(self, player):
+        cells = self.grid == np.full(self.gridShape, player)
         for i in (0, 1):
             if cells.all(axis=i).any():
                 return True
@@ -37,13 +37,13 @@ class NoughtsAndCrosses(Game):
         await self.sendOutput('Player', self.player)
         while True:
             position = await self.getInput('Position', tuple, self.player)
-            if self.isEmpty(position, self.grid):
+            if self.isEmpty(position):
                 break
             await self.sendOutput('Error', 'That space is already full.')
 
         self.grid[position] = self.player
         await self.sendOutput('Grid', self.grid)
-        if self.hasPlayerWon(self.player, self.grid):
+        if self.hasPlayerWon(self.player):
             await self.sendOutput('End', f'Player {self.player} wins.')
             return True
         if np.count_nonzero(self.grid) == 9:
@@ -55,31 +55,34 @@ class NoughtsAndCrosses(Game):
 
     def getAIInput(self, name):
         if name == 'Position':
-            return self.minMax(self.player, self.grid)[1]
+            return self.minMax(self.player)[1]
 
-    def minMax(self, player, grid, isMin=True):
-        bestScore = 0
+    def minMax(self, player, isMin=True):
+        bestScore = -2 if isMin else 2
         bestIndex = None
-        for index, cell in np.ndenumerate(grid):
-            if not self.isEmpty(index, grid):
+        for index, cell in np.ndenumerate(self.grid):
+            if not self.isEmpty(index):
                 continue
-            score = 0
-            newGrid = grid.copy()
-            newGrid[index] = player
-            if self.hasPlayerWon(player, newGrid):
-                score = abs(self.player - player) * 2 - 1
+            self.grid[index] = player
+            if self.hasPlayerWon(player):
+                score = 1 if self.player == player else -1
             else:
-                score = self.minMax(3 - player, newGrid, not isMin)[0]
-            if score == bestScore or isMin == (score < bestScore):
-                bestScore = score
-                bestIndex = index
-                if (isMin and bestScore == 1) or (not isMin and bestScore == -1):
-                    break
-        if bestIndex == None:
-            for index, cell in np.ndenumerate(grid):
-                if self.isEmpty(index, grid):
+                score = self.minMax(3 - player, not isMin)[0]
+            self.grid[index] = 0
+            if isMin:
+                if score > bestScore:
+                    bestScore = score
                     bestIndex = index
-                    break
+                    if bestScore == 1:
+                        break
+            else:
+                if score < bestScore:
+                    bestScore = score
+                    bestIndex = index
+                    if bestScore == -1:
+                        break
+        if bestIndex == None:
+            bestScore = 0
         return (bestScore, bestIndex)
 
     async def game(self):
