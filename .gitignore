@@ -109,3 +109,6 @@ virtualenv/
 
 # Visual studio code
 .vscode
+
+# Cython generated (C) files
+*.c
