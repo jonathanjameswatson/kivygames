@@ -1,16 +1,28 @@
-import numpy as np
-
 cimport numpy as np
 cimport cython
 
+@cython.boundscheck(False)
+@cython.wraparound(False)
 cpdef bint hasPlayerWon(np.ndarray[np.uint8_t, ndim=2] grid, int player):
-    cdef np.ndarray[np.uint8_t, ndim=2, cast=True] cells
-    cells = grid == np.full((3, 3), player)
-    cdef int i
-    for i in range(2):
-        if cells.all(axis=i).any():
+    cdef int i, j, count1, count2
+    for i in range(3):
+        count1 = 0
+        count2 = 0
+        for j in range(3):
+            if grid[i, j] == player:
+                count1 += 1
+            if grid[j, i] == player:
+                count2 += 1
+        if count1 == 3 or count2 == 3:
             return True
-    if cells.diagonal().all() or np.fliplr(cells).diagonal().all():
+    count1 = 0
+    count2 = 0
+    for i in range(3):
+        if grid[i, i] == player:
+            count1 += 1
+        if grid[i, 2 - i] == player:
+            count2 += 1
+    if count1 == 3 or count2 == 3:
         return True
     return False
 
