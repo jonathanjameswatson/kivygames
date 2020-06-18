@@ -20,34 +20,34 @@ class NoughtsAndCrosses(Game):
     def __init__(self, nPlayers, nAI):
         Game.__init__(self, nPlayers, nAI)
 
-        self.grid = np.zeros(self.gridShape, dtype='u1')
+        self.grid = np.zeros(self.gridShape, dtype="u1")
         self.player = 1
 
     def isEmpty(self, position):
         return self.grid[position] == 0
 
     async def turn(self):
-        await self.sendOutput('Player', self.player)
+        await self.sendOutput("Player", self.player)
         while True:
-            position = await self.getInput('Position', tuple, self.player)
+            position = await self.getInput("Position", tuple, self.player)
             if self.isEmpty(position):
                 break
-            await self.sendOutput('Error', 'That space is already full.')
+            await self.sendOutput("Error", "That space is already full.")
 
         self.grid[position] = self.player
-        await self.sendOutput('Grid', self.grid)
+        await self.sendOutput("Grid", self.grid)
         if c.hasPlayerWon(self.grid, self.player):
-            await self.sendOutput('End', f'Player {self.player} wins.')
+            await self.sendOutput("End", f"Player {self.player} wins.")
             return True
         if np.count_nonzero(self.grid) == 9:
-            await self.sendOutput('End', f'It\'s a draw!')
+            await self.sendOutput("End", f"It's a draw!")
             return True
         self.player = 3 - self.player
 
         return False
 
     def getAIInput(self, name):
-        if name == 'Position':
+        if name == "Position":
             return c.minimax(self.player, self.player, True, self.grid)[1]
 
     def minMax(self, player, isMin=True):
@@ -74,13 +74,13 @@ class NoughtsAndCrosses(Game):
                     bestIndex = index
                     if bestScore == -1:
                         break
-        if bestIndex == None:
+        if bestIndex is None:
             bestScore = 0
         return (bestScore, bestIndex)
 
     async def game(self):
         while True:
             ended = await self.turn()
-            if (ended):
+            if ended:
                 break
         await self.end()

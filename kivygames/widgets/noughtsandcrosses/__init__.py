@@ -7,12 +7,12 @@ from kivygames.widgets import GameLayout
 
 class NoughtsAndCrosses(GameLayout):
     gameFunction = NoughtsAndCrosses
-    outputs = DictProperty({
-        'Player': 1,
-        'Error': '',
-        'End': '',
-        'Grid': np.zeros((3, 3))
-    })
-    playerText = AliasProperty(lambda self: f'Player {self.outputs["Player"]}', bind=['outputs'])
+    outputs = DictProperty(
+        {"Player": 1, "Error": "", "End": "", "Grid": np.zeros((3, 3))}
+    )
+    playerText = AliasProperty(
+        lambda self: f'Player {self.outputs["Player"]}', bind=["outputs"]
+    )
     cells = AliasProperty(
-        lambda self: self.outputs['Grid'].flatten().tolist(), bind=['outputs'])
+        lambda self: self.outputs["Grid"].flatten().tolist(), bind=["outputs"]
+    )

@@ -8,7 +8,7 @@ class Cell(ButtonBehavior, Image):
     pass
 
 
-marks = ['empty.png', 'nought.png', 'cross.png']
+marks = ["empty.png", "nought.png", "cross.png"]
 
 
 class NoughtsAndCrossesBoard(GridLayout):
@@ -17,11 +17,15 @@ class NoughtsAndCrossesBoard(GridLayout):
 
     def __init__(self, **kwargs):
         GridLayout.__init__(self, **kwargs)
-        self.register_event_type('on_choose')
+        self.register_event_type("on_choose")
         self.cells = []
         for i in range(9):
-            cell = Cell(source=marks[0], on_press=lambda sender,
-                        i=i: self.dispatch('on_choose', (i // 3, i % 3)))
+            cell = Cell(
+                source=marks[0],
+                on_press=lambda sender, i=i: self.dispatch(
+                    "on_choose", (i // 3, i % 3)
+                ),
+            )
             self.add_widget(cell)
             self.cells.append(cell)
 

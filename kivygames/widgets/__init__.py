@@ -8,7 +8,7 @@ from kivy.properties import DictProperty
 
 def loadKv():
     filename = currentframe().f_back.f_code.co_filename
-    f = extsep.join((splitext(filename)[0], 'kv'))
+    f = extsep.join((splitext(filename)[0], "kv"))
     if exists(f) and f not in Builder.files:
         Builder.load_file(f)
 

@@ -10,10 +10,11 @@ def testGame():
             inputName = io[1]
             inputType = io[2]
             response = eval(
-                input(f'Input value {inputName} of type {inputType.__name__}: '))
+                input(f"Input value {inputName} of type {inputType.__name__}: ")
+            )
             io = game.send(response)
         else:
             outputName = io[1]
             response = io[2]
-            print(f'{outputName}: {response}')
+            print(f"{outputName}: {response}")
             io = game.send(None)
