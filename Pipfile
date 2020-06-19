@@ -8,7 +8,7 @@ black = "*"
 
 [packages]
 numpy = ">=1.18"
-Kivy = ">=2.0.0rc2"
+Kivy = ">=1.11.1"
 cython = "*"
 
 [requires]

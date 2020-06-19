@@ -1,4 +1,3 @@
-import asyncio
 import numpy as np
 
 from kivygames.games import Game

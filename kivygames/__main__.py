@@ -1,4 +1,3 @@
-import asyncio
 from os import scandir
 from os.path import abspath, join
 from importlib import import_module
@@ -28,18 +27,9 @@ class KivyGamesApp(App):
         Window.clearcolor = (1, 1, 1, 1)
         self.title = "Kivy Games"
 
-    def app_func(self):
-        async def run_wrapper():
-            await self.async_run()
-
-        return asyncio.gather(run_wrapper())
-
 
 if __name__ == "__main__":
     importKv()
     resource_add_path(abspath(f"{__file__}/../assets"))
 
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(KivyGamesApp().app_func())
-    loop.close()
     KivyGamesApp().run()
