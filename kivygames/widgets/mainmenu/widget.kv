@@ -1,15 +1,11 @@
 #:kivy 1.11.1
 
 <MainMenu>:
-    BoxLayout:
-        size: self.parent.size
-        padding: 20
-        orientation: 'vertical'
-        Label:
-            size_hint: 1, None
-            text: 'Kivy Games'
-        GridLayout:
-            cols: 3
-            Button:
-                text: 'Noughts And Crosses'
-                on_press: app.root.current = 'noughtsandcrosses'
+    padding: 20
+    orientation: 'vertical'
+    Label:
+        size_hint: 1, None
+        text: 'Kivy Games'
+    GridLayout:
+        cols: 3
+        id: buttonGrid
