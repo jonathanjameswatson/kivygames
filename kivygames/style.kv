@@ -13,7 +13,8 @@
     canvas:
         Color:
             rgba: [0.75, 0.75, 0.75, 1] if self.state == 'normal' else [0.8, 0.8, 0.8, 1]
-        Rectangle:
+        RoundedRectangle:
+            radius: [(4, 4)] * 4
             pos: self.pos
             size: self.size
         Color:
@@ -22,3 +23,28 @@
             texture: self.texture
             size: self.texture_size
             pos: int(self.center_x - self.texture_size[0] / 2.), int(self.center_y - self.texture_size[1] / 2.)
+
+<-Slider>:
+    canvas:
+        Color:
+            rgb: 0.75, 0.75, 0.75, 1
+        RoundedRectangle:
+            radius: [(4, 4)] * 4
+            segments: 4
+            pos: (self.x + self.padding, self.center_y - 4) if self.orientation == 'horizontal' else (self.center_x - 4, self.y + self.padding)
+            size: (self.width - self.padding * 2, 8) if self.orientation == 'horizontal' else (8, self.height - self.padding * 2)
+        Color:
+            rgba: root.value_track_color if self.value_track and self.orientation == 'horizontal' else [1, 1, 1, 0]
+        Line:
+            width: self.value_track_width
+            points: self.x + self.padding, self.center_y, self.value_pos[0], self.center_y
+        Color:
+            rgba: root.value_track_color if self.value_track and self.orientation == 'vertical' else [1, 1, 1, 0]
+        Line:
+            width: self.value_track_width
+            points: self.center_x, self.y + self.padding, self.center_x, self.value_pos[1]
+        Color:
+            rgb: 0.75, 0.75, 0.75, 1
+        Ellipse:
+            pos: (root.value_pos[0] - 14, root.center_y - 14) if root.orientation == 'horizontal' else (root.center_x - 14, root.value_pos[1] - 14)
+            size: 28, 28
