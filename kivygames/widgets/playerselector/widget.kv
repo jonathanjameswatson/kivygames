@@ -1,0 +1,19 @@
+#:kivy 1.11.1
+
+<PlayerSelector>:
+    Label:
+        text: root.numPlayersText
+    Slider:
+        value: root.numPlayers
+        step: 1
+        min: root.minPlayers
+        max: root.maxPlayers
+        on_value: root.numPlayers = self.value
+    Label:
+        text: root.numAIText
+    Slider:
+        value: root.numAI
+        on_value: root.numAI = self.value
+        step: 1
+        min: 0
+        max: root.maxAI
