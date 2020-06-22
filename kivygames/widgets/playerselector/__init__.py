@@ -29,7 +29,7 @@ class PlayerSelector(BoxLayout):
         BoxLayout.__init__(self, **kwargs)
         self.register_event_type("on_choose")
 
-    def on_gameLayout(self, instance, gameObject):
+    def on_gameObject(self, instance, gameObject):
         self.minPlayers = gameObject.minPlayers
         self.maxPlayers = gameObject.maxPlayers
         self.numPlayers = gameObject.maxPlayers
