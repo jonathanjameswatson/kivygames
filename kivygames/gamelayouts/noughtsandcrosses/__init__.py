@@ -7,7 +7,7 @@ from kivygames.gamelayouts import GameLayout
 
 class NoughtsAndCrosses(GameLayout):
     name = "Noughts and crosses"
-    gameFunction = NoughtsAndCrosses
+    gameObject = NoughtsAndCrosses
     outputs = DictProperty(
         {"Player": 1, "Error": "", "End": "", "Grid": np.zeros((3, 3))}
     )

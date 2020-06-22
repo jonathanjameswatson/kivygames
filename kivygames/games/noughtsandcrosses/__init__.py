@@ -10,14 +10,14 @@ class CellOccupiedError(Exception):
 
 
 class NoughtsAndCrosses(Game):
-    minPlayers = 1
+    minPlayers = 2
     maxPlayers = 2
     hasAI = True
 
     gridShape = (3, 3)
 
-    def __init__(self, nPlayers, nAI):
-        Game.__init__(self, nPlayers, nAI)
+    def __init__(self):
+        Game.__init__(self)
 
         self.grid = np.zeros(self.gridShape, dtype="u1")
         self.player = 1

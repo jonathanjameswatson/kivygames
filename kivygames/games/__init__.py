@@ -12,11 +12,9 @@ class Game:
     maxPlayers = 0
     hasAI = False
 
-    def __init__(self, nPlayers, nAI):
-        self.nPlayers = nPlayers
-        self.nAI = nAI
-
-        self.players = (False, True)
+    def __init__(self):
+        self.players = None
+        self.started = False
         self.generator = self.game()
 
     async def game(self):
@@ -38,4 +36,9 @@ class Game:
         await IO(StopIteration)
 
     def send(self, message):
-        return self.generator.send(message)
+        tempMessage = message
+        if not self.started:
+            self.started = True
+            self.players = message
+            tempMessage = None
+        return self.generator.send(tempMessage)

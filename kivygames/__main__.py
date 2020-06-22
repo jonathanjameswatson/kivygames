@@ -12,9 +12,9 @@ kivy.require("1.11.1")
 
 
 def importAll():
+    Builder.load_file(abspath(f"{__file__}/../style.kv"))
     importWidgets("widgets")
     gameLayouts = importWidgets("gamelayouts", True)
-    Builder.load_file(abspath(f"{__file__}/../style.kv"))
     return gameLayouts
 
 
@@ -28,7 +28,7 @@ def importWidgets(dirName, returnLayouts=False):
         Builder.load_file(join(widgetDir.path, "widget.kv"))
         module = import_module(f"kivygames.{dirName}.{widgetDir.name}")
         if returnLayouts:
-            gameLayouts.append(getattr(module, "layout"))
+            gameLayouts.append(getattr(module, "layout")())
     return gameLayouts if returnLayouts else None
 
 
@@ -43,7 +43,7 @@ class KivyGamesApp(App):
 
 
 if __name__ == "__main__":
-    gameLayouts = importAll()
     resource_add_path(abspath(f"{__file__}/../assets"))
+    gameLayouts = importAll()
 
     KivyGamesApp(gameLayouts=gameLayouts).run()

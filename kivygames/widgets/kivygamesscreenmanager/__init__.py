@@ -12,7 +12,7 @@ class KivyGamesScreenManager(ScreenManager):
         mainmenu.add_widget(MainMenu())
         self.add_widget(mainmenu)
         for gameLayout in App.get_running_app().gameLayouts:
-            screen = Screen(name=gameLayout.__name__.lower())
-            screen.add_widget(gameLayout())
+            screen = Screen(name=type(gameLayout).__name__.lower())
+            screen.add_widget(gameLayout)
             self.add_widget(screen)
         self.current = "mainmenu"

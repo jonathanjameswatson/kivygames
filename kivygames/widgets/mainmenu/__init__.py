@@ -1,13 +1,17 @@
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.app import App
+from kivy.properties import ObjectProperty
 
 
 class MainMenu(BoxLayout):
+    gameLayout = ObjectProperty()
+
     def __init__(self, **kwargs):
         BoxLayout.__init__(self, **kwargs)
-        buttonGrid = self.ids["buttonGrid"]
         self.app = App.get_running_app()
+        self.gameLayout = self.app.gameLayouts[0]
+        buttonGrid = self.ids["buttonGrid"]
         for i, gameLayout in enumerate(self.app.gameLayouts):
             button = Button(
                 text=gameLayout.name,
@@ -16,4 +20,8 @@ class MainMenu(BoxLayout):
             buttonGrid.add_widget(button)
 
     def setGame(self, gameLayout):
-        self.app.root.current = gameLayout.__name__.lower()
+        self.gameLayout = gameLayout
+
+    def startGame(self, instance, players):
+        self.app.root.current = type(self.gameLayout).__name__.lower()
+        self.gameLayout.start(players)

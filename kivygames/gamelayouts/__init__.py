@@ -4,15 +4,17 @@ from kivy.properties import DictProperty
 
 class GameLayout(BoxLayout):
     name = ""
-    gameFunction = None
+    gameObject = None
     outputs = DictProperty({})
 
     def __init__(self, **kwargs):
         BoxLayout.__init__(self, **kwargs)
-        self.game = self.gameFunction(2, 0)
+        self.game = self.gameObject()
         self.ended = False
         self.nextInput = (None, None)
-        self.send()
+
+    def start(self, players):
+        self.send(players)
 
     def send(self, value=None):
         io = self.game.send(value)
