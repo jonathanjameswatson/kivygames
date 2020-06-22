@@ -1,19 +1,27 @@
 #:kivy 1.11.1
 
 <PlayerSelector>:
+    orientation: 'vertical'
     Label:
         text: root.numPlayersText
     Slider:
         value: root.numPlayers
+        on_value: root.numPlayers = self.value
         step: 1
         min: root.minPlayers
         max: root.maxPlayers
-        on_value: root.numPlayers = self.value
     Label:
         text: root.numAIText
+        opacity: 1 if root.hasAI else 0
     Slider:
         value: root.numAI
         on_value: root.numAI = self.value
         step: 1
         min: 0
         max: root.maxAI
+        opacity: 1 if root.hasAI else 0
+    Button:
+        text: 'Play'
+        size_hint: (None, 1)
+        pos_hint: {'center_x': 0.5}
+        on_press: root.submit()

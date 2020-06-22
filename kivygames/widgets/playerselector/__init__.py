@@ -38,11 +38,12 @@ class PlayerSelector(BoxLayout):
             self.maxAI = self.maxPlayers - 1
             self.numAI = self.maxPlayers - 1
 
-    def submit(self, instance, pos):
+    def submit(self):
         players = []
-        players += [False] * numPlayers - numAI
-        players += [True] * numAI
-        self.dispatch("choose", tuple(*players))
+        numAI = self.numAI if self.hasAI else 0
+        players += [False] * int(self.numPlayers - numAI)
+        players += [True] * int(numAI)
+        self.dispatch("on_choose", tuple(players))
 
     def on_choose(self, players):
         pass
