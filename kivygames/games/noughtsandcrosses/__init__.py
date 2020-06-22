@@ -49,34 +49,6 @@ class NoughtsAndCrosses(Game):
         if name == "Position":
             return c.minimax(self.player, self.player, True, self.grid)[1]
 
-    def minMax(self, player, isMin=True):
-        bestScore = -2 if isMin else 2
-        bestIndex = None
-        for index, cell in np.ndenumerate(self.grid):
-            if not self.isEmpty(index):
-                continue
-            self.grid[index] = player
-            if self.hasPlayerWon(player):
-                score = 1 if self.player == player else -1
-            else:
-                score = self.minMax(3 - player, not isMin)[0]
-            self.grid[index] = 0
-            if isMin:
-                if score > bestScore:
-                    bestScore = score
-                    bestIndex = index
-                    if bestScore == 1:
-                        break
-            else:
-                if score < bestScore:
-                    bestScore = score
-                    bestIndex = index
-                    if bestScore == -1:
-                        break
-        if bestIndex is None:
-            bestScore = 0
-        return (bestScore, bestIndex)
-
     async def game(self):
         while True:
             ended = await self.turn()
