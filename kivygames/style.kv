@@ -12,9 +12,10 @@
 <-Button,-ToggleButton>:
     canvas:
         Color:
-            rgba: [0.75, 0.75, 0.75, 1] if self.state == 'normal' else [0.8, 0.8, 0.8, 1]
+            rgba: [0.1, 0.8, 0.7, 1] if self.state == 'normal' else [0.1, 0.7, 0.6, 1]
         RoundedRectangle:
-            radius: [(4, 4)] * 4
+            radius: [8]
+            segments: 1
             pos: self.pos
             size: self.size
         Color:
@@ -27,10 +28,10 @@
 <-Slider>:
     canvas:
         Color:
-            rgb: 0.75, 0.75, 0.75, 1
+            rgb: 0.1, 0.8, 0.7, 1
         RoundedRectangle:
-            radius: [(4, 4)] * 4
-            segments: 4
+            radius: [4]
+            segments: 1
             pos: (self.x + self.padding, self.center_y - 4) if self.orientation == 'horizontal' else (self.center_x - 4, self.y + self.padding)
             size: (self.width - self.padding * 2, 8) if self.orientation == 'horizontal' else (8, self.height - self.padding * 2)
         Color:
@@ -44,7 +45,8 @@
             width: self.value_track_width
             points: self.center_x, self.y + self.padding, self.center_x, self.value_pos[1]
         Color:
-            rgb: 0.75, 0.75, 0.75, 1
+            rgb: 0.1, 0.7, 0.6, 1
         Ellipse:
             pos: (root.value_pos[0] - 14, root.center_y - 14) if root.orientation == 'horizontal' else (root.center_x - 14, root.value_pos[1] - 14)
+            segments: 4
             size: 28, 28
