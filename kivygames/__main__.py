@@ -1,12 +1,16 @@
 from os import scandir
 from os.path import abspath, join
 from importlib import import_module
+from kivy.config import Config
+
+
+Config.set("kivy", "window_icon", "kivygames/assets/icon.ico")
+
+import kivy
 from kivy.app import App
 from kivy.lang.builder import Builder
 from kivy.core.window import Window
 from kivy.resources import resource_add_path
-import kivy
-
 
 kivy.require("1.11.1")
 
