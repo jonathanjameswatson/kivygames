@@ -3,7 +3,12 @@
 <NoughtsAndCrossesBoard>:
     size_hint: None, None
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-    padding: self.parent.padding
     size: [min(self.parent.size)] * 2
     cols: 3
-    spacing: 5
+    canvas.before:
+        Color:
+            rgb: 0.1, 0.8, 0.7
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'noughtsandcrossesboard.png'
