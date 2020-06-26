@@ -33,6 +33,7 @@ class NoughtsAndCrosses(Game):
                 break
             await self.sendOutput("Error", "That space is already full.")
 
+        await self.sendOutput("Error", "")
         self.grid[position] = self.player
         await self.sendOutput("Grid", self.grid)
         if c.hasPlayerWon(self.grid, self.player):
