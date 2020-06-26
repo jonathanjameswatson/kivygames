@@ -1,4 +1,4 @@
-from os import scandir
+from os import scandir, environ, name
 from os.path import abspath, join
 from importlib import import_module
 from kivy.config import Config
@@ -13,6 +13,19 @@ from kivy.core.window import Window
 from kivy.resources import resource_add_path
 
 kivy.require("1.11.1")
+
+if name == "nt":
+    import ctypes
+    import tkinter
+
+    ctypes.windll.shcore.SetProcessDpiAwareness(1)
+    root = tkinter.Tk()
+    root.overrideredirect(1)
+    root.withdraw()
+    dpi = ctypes.windll.user32.GetDpiForWindow(root.winfo_id())
+    scale = str(dpi / 96)
+    root.destroy()
+    environ["KIVY_METRICS_DENSITY"] = scale
 
 
 def importAll():
