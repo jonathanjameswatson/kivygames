@@ -1,10 +1,10 @@
-from kivygames.games.noughtsandcrosses import NoughtsAndCrosses
+from kivygames.games.rockpaperscissors import RockPaperScissors, Hand
 
 
 def testGame():
-    game = NoughtsAndCrosses(2, 0)
-    io = game.send(None)
-    while io != StopIteration:
+    game = RockPaperScissors()
+    io = game.send([False])
+    while io[0] != StopIteration:
         isInput = io[0]
         if isInput:
             inputName = io[1]
@@ -12,6 +12,7 @@ def testGame():
             response = eval(
                 input(f"Input value {inputName} of type {inputType.__name__}: ")
             )
+            response = inputType(response)
             io = game.send(response)
         else:
             outputName = io[1]
