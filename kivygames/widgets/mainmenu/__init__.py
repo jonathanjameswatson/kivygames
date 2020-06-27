@@ -12,10 +12,10 @@ class MainMenu(BoxLayout):
         self.app = App.get_running_app()
         self.gameLayout = self.app.gameLayouts[0]
         buttonGrid = self.ids["buttonGrid"]
-        for i, gameLayout in enumerate(self.app.gameLayouts):
+        for gameLayout in self.app.gameLayouts:
             button = Button(
                 text=gameLayout.name,
-                on_press=lambda sender, i=i: self.setGame(gameLayout),
+                on_press=lambda sender, gameLayout=gameLayout: self.setGame(gameLayout),
             )
             buttonGrid.add_widget(button)
 

@@ -9,6 +9,7 @@
     GridLayout:
         cols: 3
         id: buttonGrid
+        spacing: 20
     PlayerSelector:
         gameObject: root.gameLayout.gameObject if root.gameLayout else None
         on_choose: root.startGame(*args)
