@@ -1,0 +1,39 @@
+#:kivy 1.11.1
+
+<EmojiButton>:
+    font_name: 'NotoEmoji-Regular.ttf'
+    size_hint: 0.5, 0.25
+    font_size: self.height * 0.8
+
+<RockPaperScissors>:
+    orientation: 'vertical'
+    Label:
+        text: 'Rock, Paper, Scissors'
+        size_hint: 1, None
+    FloatLayout:
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            size: [min(self.parent.size)] * 2
+            FloatLayout:
+                EmojiButton:
+                    text: "✊"
+                    pos_hint: {"center_x": 0.5, "center_y": 0.18}
+                    on_press: self.select(1)
+                EmojiButton:
+                    text: "✋"
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    on_press: self.select(2)
+                EmojiButton:
+                    text: "✌"
+                    pos_hint: {"center_x": 0.5, "center_y": 0.82}
+                    on_press: self.select(3)
+            FloatLayout:
+                EmojiButton:
+                    text: root.outputs['AIHand']
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    disabled: True
+    Label:
+        text: root.outputs['End']
+        size_hint: 1, None
