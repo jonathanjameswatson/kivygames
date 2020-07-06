@@ -14,7 +14,7 @@ setup(
     description="A collection of simple games made with Kivy",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/jonathanjameswatson/kivy-games",
+    url="https://github.com/jonathanjameswatson/kivygames",
     license="MIT",
     install_requires=[
         "wheel",
