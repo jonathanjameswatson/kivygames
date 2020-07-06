@@ -33,7 +33,7 @@ class NoughtsAndCrossesBoard(GridLayout):
 
     def updateCells(self):
         for i, cell in enumerate(self.cells):
-            cell.source = marks[self.cellsProperty[i]]
+            cell.source = marks[int(self.cellsProperty[i])]
 
     def on_choose(self, position):
         pass

@@ -1,11 +1,11 @@
-from kivy.uix.button import Button
 from kivy.properties import DictProperty
 
 from kivygames.games.rockpaperscissors import RockPaperScissors, Hand
+from kivygames.widgets.emojibutton import EmojiButton
 from kivygames.gamelayouts import GameLayout
 
 
-class EmojiButton(Button):
+class HandButton(EmojiButton):
     def select(self, number):
         self.parent.parent.parent.parent.gameInput("Hand", self, Hand(number))
 
