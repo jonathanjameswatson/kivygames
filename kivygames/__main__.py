@@ -59,8 +59,12 @@ class KivyGamesApp(App):
         self.title = "Kivy Games"
 
 
-if __name__ == "__main__":
+def run():
     resource_add_path(abspath(f"{__file__}/../assets"))
     gameLayouts = importAll()
 
     KivyGamesApp(gameLayouts=gameLayouts).run()
+
+
+if __name__ == "__main__":
+    run()
